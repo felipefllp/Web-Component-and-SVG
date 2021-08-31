@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+
+  <title>Wc Relogio - Felipe Lopes</title>
+
+  <script>
+    class WcRelogioElement extends HTMLElement {
+      static observedAttributes = ["tipo"];
+
+      constructor() {
+        super();
+
+        this.attachShadow({ mode: "open" });
+        const tpl = document.getElementById("template-wc");
+        this.shadowRoot.append(tpl.content.cloneNode(true));
+      }
+
+      connectedCallback() {
+        const tipo = this.getAttribute("tipo");
+        console.log(`tipo`, tipo)
+      }
+
+      attributeChangedCallback(attr, oldValue, newValue) {
+        if (attr === "tipo") {
+          console.log(`newValue`, newValue)
+        }
+      }
+    }
+
+    customElements.define("wc-relogio", WcRelogioElement);
+  </script>
+</head>
+
+<body>
+  <template id="template-wc">
+    <style>
+      :host {
+        display: inline-block;
+      }
+    </style>
+
+    
+
+  </template>
+
+
+  <wc-relogio tipo="abalogico"></wc-relogio>
+</body>
+
+</html>
